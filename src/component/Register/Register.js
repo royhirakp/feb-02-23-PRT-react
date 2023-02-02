@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import axios from 'axios'
-import Loader from "./Loader"
+import { Link } from "react-router-dom";
+import Loader from "../Loader"
+import './Register.css'
 const Register = (props) => {
   const [inputEmail, setInputaEmail] = useState('');
   const [inputPassword, setInputaPassword] = useState('');
@@ -32,7 +34,8 @@ const Register = (props) => {
             email: inputEmail,
             password: inputPassword
           } 
-          const resp = await axios.post('https://dec-k5lr.onrender.com/user/register', body)      
+          const resp = await axios.post('https://dec-k5lr.onrender.com/user/register', body)  
+          console.log(resp)    
           setSuccessMsg(resp.data.status)
           setAxiosErr('')
         } catch (error) {
@@ -47,15 +50,24 @@ const Register = (props) => {
 
       <h3>SING UP</h3>
       <form onSubmit={onsunmitFun}>
-        email:
-        <input type='email' onChange={(e) => setInputaEmail(e.target.value)} /><br />
-        password:
-        <input type='password' onChange={(e) => setInputaPassword(e.target.value)} /><br />
-        Confirm password:
-        <input type='password' onChange={(e) => setconfirmPassword(e.target.value)} /><br />
+        
+        <input type='email'
+        placeholder="Email"
+        onChange={(e) => setInputaEmail(e.target.value)} /><br />
+     <br />
+        <input type='password'
+        placeholder="Password"
+        onChange={(e) => setInputaPassword(e.target.value)} /><br />
+      <br />
+        <input type='password'
+        placeholder="confirm password"
+        onChange={(e) => setconfirmPassword(e.target.value)} /><br />
         {!passMtchStatus ? <p style={{ "color": "red" }}>Password Notmatched</p> : <></>}
         {!passwordLengthStatus ? <p style={{ "color": "red" }}>length shouldbe 8</p> : <></>}
-        <button type="submit">SING UP</button>
+        <br />
+        <button type="submit">Register</button>
+        <br />
+        <Link to="/">SingIn</Link>
       </form>
       
       {susecssMess ? <h4 style={{color: "green"}}>{susecssMess}</h4> : <></>}

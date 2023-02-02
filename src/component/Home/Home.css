@@ -1,0 +1,45 @@
+body{
+    background-color: antiquewhite;
+}
+.mailContainer .header{
+    border: 1px sienna solid;
+    height: 50px;
+}
+.mailContainer .header h3{
+border: 1px sienna solid;
+display: inline;
+float: right;
+padding: 0 150px 0 0;
+}
+.section{
+    border: 1px sienna solid;
+    display:flex;
+    width: 100%;
+}
+.history{
+    border: 1px sienna solid;
+    width: 18%;
+    display: inline-block;
+}
+.todolist{
+    border: 1px sienna solid;
+    width: 75%;
+    display: inline-block;
+    /* float: right; */
+}
+tr{
+    border: 1px solid;
+}
+th{
+    border: 1px solid;
+    padding:2px 40px 0 40px;
+}
+td{
+    border: 1px solid;
+    text-align: center;
+}
+.historyList{
+    width: 200px;
+    border: 1px solid;
+    height: 400px;
+}

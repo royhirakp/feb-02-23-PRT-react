@@ -3,27 +3,16 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import Loader from './Loader';
 const Create=(props)=>{
-    const [title, setTitle] = useState('')
-    const [image, setImage] = useState({})
-    const [describtion, setDescribtion] =useState('')
+    const [todo, setTodo] = useState('')
     const navgate = useNavigate()
     const [loader, setLoder] = useState(false)
 
     async function onSubmitf (e){
-        
         e.preventDefault()  
-        console.log(image)   
-        const fromData = new FormData();
-        fromData.append('image',image)
-        fromData.append('title',title)
-        fromData.append('describtion',describtion)
-        console.log(fromData)
         setLoder(true) 
         try {
             const body = {
-                title : title,
-                describtion : describtion,
-                // image: image
+                Acivity : todo
             }
             console.log(body,'body')
             const config = {
@@ -31,29 +20,25 @@ const Create=(props)=>{
                     authorization : localStorage.getItem('logToken')                      
                 }
             }
-            const res = await axios.post('https://dec-k5lr.onrender.com/blog',body,config)
-                console.log(res)       
+            const res = await axios.post('https://dec-k5lr.onrender.com/todo',body,config)
+                // console.log(res)       
         } catch (error) {
             console.log(error)
         }
         setLoder(false)
-        // navgate('/home')
+        navgate('/home')
     } 
-    function handelfile(e){
-        console.log((e.target.files[0]))
-        setImage(e.target.files[0])
-    }
     return (
         <div className='book-container'>
-            <h5>Create Page</h5>
+            <h5>New ToDo</h5>
             <form onSubmit={onSubmitf}>
-                title:
-                <input type='text' onChange={(e)=>setTitle(e.target.value)}/> <br/>
-                image:
-                <input type='file' onChange={handelfile}/><br/>
-                Describsion:
-                <input type='text'  onChange={(e)=>setDescribtion(e.target.value)}/><br/>
-                <button type="submit" >SAVE POST</button>
+                Todo:
+                <br />
+                <input type='text' 
+                placeholder='type here...'
+                onChange={(e)=>setTodo(e.target.value)}/> <br/>
+                <br />
+                <button type="submit" >SAVE ToDo</button>
             </form>    
             {loader ? <Loader /> : <></>}
       </div>

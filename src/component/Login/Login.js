@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 // import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import Loader from './Loader';
+import Loader from '../Loader';
 // import Coockie from 'js-coocki'
+import './Login.css'
 
 const Login = (props) => {
   const [inputEmail, setInputaEmail] = useState('')
@@ -13,7 +14,7 @@ const Login = (props) => {
   const navgate = useNavigate()
   const [errorMessege, setErrorMessege] = useState('')
   const [loader, setLoder] = useState(false)
-  const [checkboxStatus, setCheckboxStatus] = useState(null)
+  // const [checkboxStatus, setCheckboxStatus] = useState(null)
   const [emailValidaion,setEmailValidation] = useState(false)
   const [passWValidaion,setPassWValidation] = useState(false)
  
@@ -32,7 +33,7 @@ const Login = (props) => {
   async function onsunmitFun(e) {
     e.preventDefault()
     console.log('onsubmit')
-    console.log(checkboxStatus)
+    // console.log(checkboxStatus)
     setLoder(true)
     try {
       const body = {
@@ -41,8 +42,9 @@ const Login = (props) => {
       }
       let res = await axios.post('https://dec-k5lr.onrender.com/user/login', body)
       setErrorMessege('')
-      // console.log(res.data.token)
+      console.log(res.data.token,'<<<<<token')
       localStorage.setItem('logToken', res.data.token) 
+      localStorage.setItem('userID',inputEmail.split('@')[0])
       navgate('./home')
       // // coocki
       // document.cookie = 'SEmail'+inputEmail+";path=http://localhost:3000"
@@ -55,27 +57,36 @@ const Login = (props) => {
 
   return (
     <div className='Login-container'>
-      <h3>LOGIN</h3>
+      <h3>Membaer Login</h3>
+      <br /><br />
       <form onSubmit={onsunmitFun}>
-        email:
-        <input type='email' style={{border:emailValidaion?"red 4px solid":''}}
+        <br />
+        <input type='email'
+        placeholder='Username'
+        style={{border:emailValidaion?"red 4px solid":''}}
           onChange={(e) => setInputaEmail(e.target.value)}
         /><br/>
         {
           emailValidaion ? <p style={{color:"red"}}>not a valid email</p>: <></>
         }
-        password:
-        <input type='password' style={{border:passWValidaion ?"red 4px solid":""}}
+      <br />
+        <input type='password'
+        placeholder='Password'
+        // style={{border:passWValidaion ?"red 4px solid":""}}
           onChange={(e) => setInputaPassword(e.target.value)}
         /><br/>
         {
-          passWValidaion ? <p style={{color:"red"}}>not a valid password</p>: <></>
+          // passWValidaion ? <p style={{color:"red"}}>not a valid password</p>: <></>
         }
+        <br />
         <button type="submit">Login</button>
       </form>
-      <input type='checkbox'
+      {/* <input type='checkbox'
         onClick={(e)=>{setCheckboxStatus(e.target.checked)}}
-      /> Remember me? <br />
+      /> Remember me? <br /> */}
+      <Link to="#">Forgot Password?</Link>
+      <br />
+      <br />
       Need an accout? <Link to="/register">SingUp</Link>
       {errorMessege ? <h3 style={{ color: 'red' }}>{errorMessege}</h3> : ""}
       {loader ? <Loader /> : <></>}
