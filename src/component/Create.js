@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Loader from './Loader';
 const Create=(props)=>{
     const [todo, setTodo] = useState('')
+    const [todoStatus, setTodoStatus] = useState(false)
     const navgate = useNavigate()
     const [loader, setLoder] = useState(false)
 
@@ -20,13 +21,18 @@ const Create=(props)=>{
                     authorization : localStorage.getItem('logToken')                      
                 }
             }
-            const res = await axios.post('https://dec-k5lr.onrender.com/todo',body,config)
+            if(todo !== ""){
+                const res = await axios.post('https://dec-k5lr.onrender.com/todo',body,config)
+                navgate('/home')
+            }else{
+                setTodoStatus(true)
+            }
                 // console.log(res)       
         } catch (error) {
             console.log(error)
         }
         setLoder(false)
-        navgate('/home')
+        
     } 
     return (
         <div className='book-container'>
@@ -40,6 +46,7 @@ const Create=(props)=>{
                 <br />
                 <button type="submit" >SAVE ToDo</button>
             </form>    
+            {todoStatus?(<h3 style={{"color":"green"}}>input fild cant be empty! Type your todo.</h3>):""}
             {loader ? <Loader /> : <></>}
       </div>
     )

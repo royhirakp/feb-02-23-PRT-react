@@ -6,10 +6,12 @@ body{
     height: 50px;
 }
 .mailContainer .header h3{
-border: 1px sienna solid;
-display: inline;
-float: right;
-padding: 0 150px 0 0;
+    border: 1px sienna solid;
+    display: inline;
+    float: right;
+    padding: 0 150px 0 0;
+    border-radius: 7px;
+    background-color: aquamarine;
 }
 .section{
     border: 1px sienna solid;
@@ -18,15 +20,25 @@ padding: 0 150px 0 0;
 }
 .history{
     border: 1px sienna solid;
-    width: 18%;
+    width: 24%;
     display: inline-block;
+}
+.AcvityButton{
+    margin-left: 700px;
+    margin-top: 26px;
 }
 .todolist{
     border: 1px sienna solid;
     width: 75%;
     display: inline-block;
+    margin-left: 50px;
+    border-radius: 15px;
+    background-color: azure;
     /* float: right; */
 }
+/* .todolist table{
+    paddin
+} */
 tr{
     border: 1px solid;
 }
@@ -40,6 +52,26 @@ td{
 }
 .historyList{
     width: 200px;
-    border: 1px solid;
+    /* border: 1px solid; */
     height: 400px;
+}
+.popup{
+    width: 249px;
+    border: 1px solid;
+    height: 300px;
+    z-index: 555555;
+}
+button:hover{
+    cursor: pointer;
+    background-color: rgb(83, 55, 27);
+    color: #ffff;
+    font-size: larger;
+}
+button{
+    width: 100px;
+    height: 50px;
+    font-size: larger;
+    color: chocolate;
+    border-radius: 24px;
+    width: 94px;
 }
